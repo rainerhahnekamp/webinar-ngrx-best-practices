@@ -1,6 +1,5 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { sortBy } from 'lodash-es';
 import { Observable, of } from 'rxjs';
 import { delay, map, tap } from 'rxjs/operators';
 import { Customer } from './customer';
@@ -8,7 +7,7 @@ import { customers as originalCustomers } from './data';
 
 @Injectable()
 export class MockedHttpClient {
-  private customers = sortBy(originalCustomers, 'name');
+  private customers: Customer[] = originalCustomers.sort(this.customerSortFn);
   private pageSize = 10;
 
   get(url: string, options: { params: HttpParams }): Observable<Customer[]> {
@@ -72,5 +71,9 @@ export class MockedHttpClient {
           console.groupEnd();
         })
       );
+  }
+
+  private customerSortFn(customer1: Customer, customer2: Customer): number {
+    return customer1.name > customer2.name ? 1  : -1;
   }
 }

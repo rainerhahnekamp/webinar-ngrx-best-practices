@@ -1,5 +1,4 @@
 import { createReducer, on } from '@ngrx/store';
-import { flatten } from 'lodash-es';
 import { diaryActions } from './diary.actions';
 
 export const diaryFeatureKey = 'diary';
@@ -44,7 +43,7 @@ export const diaryReducer = createReducer<DiaryState>(
       const { entries, ...rest } = diary;
       return rest;
     }),
-    diaryEntries: flatten(diaryResponse.diaries.map((diary) => diary.entries))
+    diaryEntries: diaryResponse.diaries.map((diary) => diary.entries).flat()
   })),
   on(diaryActions.addSuccess, (state, action) => {
     const { entries, ...diary } = action.diaryWithEntries;
