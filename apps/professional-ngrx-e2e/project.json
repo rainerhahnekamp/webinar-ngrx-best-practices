@@ -1,0 +1,28 @@
+{
+  "root": "apps/professional-ngrx-e2e",
+  "sourceRoot": "apps/professional-ngrx-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/professional-ngrx-e2e/cypress.json",
+        "devServerTarget": "professional-ngrx:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "professional-ngrx:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/professional-ngrx-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["professional-ngrx"]
+}

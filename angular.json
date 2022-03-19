@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "professional-ngrx": "apps/professional-ngrx",
+    "professional-ngrx-e2e": "apps/professional-ngrx-e2e"
+  }
+}

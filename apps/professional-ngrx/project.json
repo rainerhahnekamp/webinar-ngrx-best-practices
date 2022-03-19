@@ -1,0 +1,94 @@
+{
+  "projectType": "application",
+  "root": "apps/professional-ngrx",
+  "sourceRoot": "apps/professional-ngrx/src",
+  "prefix": "professional-ngrx",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/professional-ngrx",
+        "index": "apps/professional-ngrx/src/index.html",
+        "main": "apps/professional-ngrx/src/main.ts",
+        "polyfills": "apps/professional-ngrx/src/polyfills.ts",
+        "tsConfig": "apps/professional-ngrx/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/professional-ngrx/src/favicon.ico",
+          "apps/professional-ngrx/src/assets"
+        ],
+        "styles": ["apps/professional-ngrx/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/professional-ngrx/src/environments/environment.ts",
+              "with": "apps/professional-ngrx/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "professional-ngrx:build:production"
+        },
+        "development": {
+          "browserTarget": "professional-ngrx:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "professional-ngrx:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/professional-ngrx/src/**/*.ts",
+          "apps/professional-ngrx/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/professional-ngrx"],
+      "options": {
+        "jestConfig": "apps/professional-ngrx/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
