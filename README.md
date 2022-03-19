@@ -44,7 +44,7 @@ yarn add -D tailwindcss postcss
 yarn add -D rxjs-marbles
 
 # Testing Boilerplate
-yarn add -D @ngneat/spectator ng-mocks ngx-build-plus @types/lodash-es @testing-library/angular
+yarn add -D @ngneat/spectator ng-mocks @testing-library/angular
 
 
 # Playwright

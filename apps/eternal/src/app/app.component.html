@@ -1,0 +1,16 @@
+<div class="main">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <app-header></app-header>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-drawer-container autosize>
+    <mat-drawer mode="side" opened>
+      <app-sidemenu></app-sidemenu>
+    </mat-drawer>
+    <mat-drawer-content>
+      <app-loader></app-loader>
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>
