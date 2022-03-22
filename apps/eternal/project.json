@@ -2,7 +2,7 @@
   "projectType": "application",
   "root": "apps/eternal",
   "sourceRoot": "apps/eternal/src",
-  "prefix": "professional-ngrx",
+  "prefix": "eternal",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",

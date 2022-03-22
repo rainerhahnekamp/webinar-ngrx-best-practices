@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { Configuration } from '@eternal/shared/config';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, switchMap } from 'rxjs/operators';
-import { BASE_URL } from '../../shared/base-url.token';
 import { Holiday } from '../holiday';
 import { holidaysActions } from './holidays.actions';
 
@@ -15,7 +15,7 @@ export class HolidaysEffects {
       map((holidays) =>
         holidays.map((holiday) => ({
           ...holiday,
-          imageUrl: `${this.baseUrl}${holiday.imageUrl}`
+          imageUrl: `${this.config.baseUrl}${holiday.imageUrl}`,
         }))
       ),
       map((holidays) => holidaysActions.findHolidaysSuccess({ holidays }))
@@ -25,6 +25,6 @@ export class HolidaysEffects {
   constructor(
     private actions$: Actions,
     private httpClient: HttpClient,
-    @Inject(BASE_URL) private baseUrl: string
+    private config: Configuration
   ) {}
 }

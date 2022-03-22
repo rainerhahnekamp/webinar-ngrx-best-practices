@@ -1,5 +1,6 @@
 {
   "npmScope": "eternal",
+  "useDaemonProcess": false,
   "affected": {
     "defaultBase": "master"
   },

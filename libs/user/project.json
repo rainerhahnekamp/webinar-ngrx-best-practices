@@ -1,0 +1,23 @@
+{
+  "projectType": "library",
+  "root": "libs/user",
+  "sourceRoot": "libs/user/src",
+  "prefix": "eternal",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/user"],
+      "options": {
+        "jestConfig": "libs/user/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/user/src/**/*.ts", "libs/user/src/**/*.html"]
+      }
+    }
+  },
+  "tags": []
+}

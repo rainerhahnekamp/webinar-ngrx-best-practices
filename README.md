@@ -38,7 +38,7 @@ yarn add @ngx-formly/core @ngx-formly/material ngx-formly-helpers
 yarn add date-fns
 
 # Tailwind
-yarn add -D tailwindcss postcss
+yarn add -D tailwindcss postcss autoprefixer
 
 # RxJs Marbles
 yarn add -D rxjs-marbles

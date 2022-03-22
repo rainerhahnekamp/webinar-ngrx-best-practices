@@ -15,7 +15,6 @@ export class HolidaysComponent implements OnInit {
   constructor(private store: Store, private httpClient: HttpClient) {}
 
   ngOnInit(): void {
-    this.httpClient.post('/log/data', {}).subscribe();
     this.store.dispatch(holidaysActions.findHolidays());
   }
 }

@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/shared/security",
+  "sourceRoot": "libs/shared/security/src",
+  "prefix": "eternal",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/security"],
+      "options": {
+        "jestConfig": "libs/shared/security/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/security/src/**/*.ts",
+          "libs/shared/security/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["domain:shared", "type:shared:security"]
+}

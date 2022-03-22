@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/shared/master-data",
+  "sourceRoot": "libs/shared/master-data/src",
+  "prefix": "eternal",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/master-data"],
+      "options": {
+        "jestConfig": "libs/shared/master-data/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/master-data/src/**/*.ts",
+          "libs/shared/master-data/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["data:shared"]
+}

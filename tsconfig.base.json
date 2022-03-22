@@ -10,11 +10,23 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "lib": ["es2019", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@eternal/customer/feature": ["libs/customer/feature/src/index.ts"],
+      "@eternal/customer/model": ["libs/customer/model/src/index.ts"],
+      "@eternal/customer/ui": ["libs/customer/ui/src/index.ts"],
+      "@eternal/holidays/feature": ["libs/holidays/feature/src/index.ts"],
+      "@eternal/holidays/model": ["libs/holidays/model/src/index.ts"],
+      "@eternal/holidays/ui": ["libs/holidays/ui/src/index.ts"],
+      "@eternal/shared/config": ["libs/shared/config/src/index.ts"],
+      "@eternal/shared/form": ["libs/shared/form/src/index.ts"],
+      "@eternal/shared/master-data": ["libs/shared/master-data/src/index.ts"],
+      "@eternal/shared/security": ["libs/shared/security/src/index.ts"],
+      "@eternal/user": ["libs/user/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

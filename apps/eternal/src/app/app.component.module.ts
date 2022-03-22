@@ -4,7 +4,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HeaderComponentModule } from './core/header/header.component';
-import { LoaderComponentModule } from './core/loader/loader.component';
+import { LoaderComponentModule } from './core/loader.component';
 import { SidemenuComponentModule } from './core/sidemenu/sidemenu.component';
 
 @NgModule({
@@ -15,8 +15,8 @@ import { SidemenuComponentModule } from './core/sidemenu/sidemenu.component';
     MatSidenavModule,
     SidemenuComponentModule,
     LoaderComponentModule,
-    RouterModule
+    RouterModule,
   ],
-  exports: [AppComponent]
+  exports: [AppComponent],
 })
 export class AppComponentModule {}

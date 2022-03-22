@@ -6,17 +6,20 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
+import { Configuration } from '@eternal/shared/config';
+import { SharedMasterDataModule } from '@eternal/shared/master-data';
+import { SecurityModule } from '@eternal/shared/security';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { FormlyModule } from '@ngx-formly/core';
+import { FormlyMaterialModule } from '@ngx-formly/material';
+import { environment } from '../environments/environment';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppComponentModule } from './app.component.module';
-import { APP_ROUTES } from './app.routes';
 import { BaseUrlInterceptor } from './core/base-url.interceptor';
 import { LoadingInterceptor } from './core/loading.interceptor';
-import { SharedModule } from './shared/shared.module';
 
 registerLocaleData(localeDe, 'de-AT');
 
@@ -26,34 +29,40 @@ registerLocaleData(localeDe, 'de-AT');
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    RouterModule.forRoot(APP_ROUTES),
+    AppRoutingModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument(),
-    SharedModule,
+    SecurityModule,
     FormlyModule.forRoot({
       extras: { lazyRender: true },
       validationMessages: [
         {
           name: 'required',
-          message: 'This field is mandatory'
-        }
-      ]
-    })
+          message: 'This field is mandatory',
+        },
+      ],
+    }),
+    FormlyMaterialModule,
+    SharedMasterDataModule,
   ],
   providers: [
     {
+      provide: Configuration,
+      useFactory: () => new Configuration(environment.baseUrl),
+    },
+    {
       provide: MAT_DATE_LOCALE,
-      useValue: 'de-AT'
+      useValue: 'de-AT',
     },
     { provide: HTTP_INTERCEPTORS, multi: true, useClass: BaseUrlInterceptor },
     { provide: HTTP_INTERCEPTORS, multi: true, useClass: LoadingInterceptor },
     { provide: LOCALE_ID, useValue: 'de-AT' },
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-      useValue: { appearance: 'outline' }
-    }
+      useValue: { appearance: 'outline' },
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

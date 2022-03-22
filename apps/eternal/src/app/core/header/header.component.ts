@@ -2,17 +2,17 @@ import { CommonModule } from '@angular/common';
 import { Component, NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
-import { UserService } from '../../shared/user.service';
+import { SecurityService } from '@eternal/shared/security';
 
 @Component({
-  selector: 'app-header',
+  selector: 'eternal-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  user$ = this.userService.loadedUser$;
+  user$ = this.userService.getLoadedUser$();
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: SecurityService) {}
 
   signOut() {
     this.userService.signOut();
@@ -22,6 +22,6 @@ export class HeaderComponent {
 @NgModule({
   imports: [CommonModule, MatButtonModule, RouterModule],
   declarations: [HeaderComponent],
-  exports: [HeaderComponent]
+  exports: [HeaderComponent],
 })
 export class HeaderComponentModule {}

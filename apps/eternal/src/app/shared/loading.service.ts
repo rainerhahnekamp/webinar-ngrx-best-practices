@@ -1,21 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { sharedActions } from './+state/shared.actions';
-import { fromShared } from './+state/shared.selectors';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class LoadingService {
-  constructor(private store: Store) {}
+  #loading$ = new BehaviorSubject(false);
+  loading$ = this.#loading$.asObservable();
 
-  get isLoading$() {
-    return this.store.select(fromShared.selectActiveHttpRequest);
+  start() {
+    this.#loading$.next(true);
   }
 
-  loading() {
-    this.store.dispatch(sharedActions.httpRequestStarted());
-  }
-
-  loaded() {
-    this.store.dispatch(sharedActions.httpRequestEnded());
+  stop() {
+    this.#loading$.next(false);
   }
 }
