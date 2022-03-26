@@ -1,29 +1,46 @@
 <h2>Customers</h2>
-<p>
+<p class="my-2">
   <a [routerLink]="['.', 'new']" color="primary" mat-raised-button
     >Add Customer</a
   >
 </p>
-<div>
-  <div class="row header">
-    <p class="edit">&nbsp;</p>
-    <p class="name">Name</p>
-    <p class="country">Country</p>
-    <p class="birthdate">Date of Birth</p>
-  </div>
-  <ng-container *ngIf="customers.length > 0; else noCustomers">
-    <div *ngFor="let customer of customers" class="row">
-      <p class="edit">
-        <a [routerLink]="['.', customer.id]">
+
+<div
+  *ngIf="dataSource.data.length > 0; else noCustomers"
+  class="my-4 max-w-screen-sm"
+>
+  <mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element | customer }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="country">
+      <mat-header-cell *matHeaderCellDef> Country</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.country }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="birthdate">
+      <mat-header-cell *matHeaderCellDef> Birthday</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{
+        element.birthdate | date
+      }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let element"
+        ><a [routerLink]="['.', element.id]">
           <mat-icon>edit</mat-icon>
-        </a>
-      </p>
-      <p class="name">{{customer | customer}}</p>
-      <p class="country">{{ customer.country }}</p>
-      <p class="birthdate">{{ customer.birthdate | date }}</p>
-    </div>
-  </ng-container>
-  <ng-template #noCustomers>
-    <p>We don't have any customers yet 😥</p>
-  </ng-template>
+        </a></mat-cell
+      >
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
 </div>
+
+<ng-template #noCustomers>
+  <p>We don't have any customers yet 😥</p>
+</ng-template>

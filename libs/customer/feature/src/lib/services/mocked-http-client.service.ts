@@ -1,7 +1,7 @@
-import { HttpParams } from '@angular/common/http';
+import { HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Customer } from '@eternal/customer/model';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { delay, map, tap } from 'rxjs/operators';
 import { customers as originalCustomers } from './data';
 
@@ -12,7 +12,7 @@ export class MockedHttpClient {
 
   get(url: string, options?: { params: HttpParams }): Observable<Customer[]> {
     if (options === undefined) {
-      return this.sortCustomers(1).pipe(this.logRequest('GET', url));
+      return of({ content: this.customers }).pipe(this.logRequest('GET', url));
     } else {
       return this.sortCustomers(Number(options.params.get('page'))).pipe(
         this.logRequest('GET', url)
@@ -33,12 +33,18 @@ export class MockedHttpClient {
   }
 
   put(url: string, customer: Customer): Observable<{ customer: Customer }> {
-    this.customers = this.customers.map((c) => {
-      if (c.id === customer.id) {
-        return customer;
-      }
-      return c;
-    });
+    if (customer.name === 'asdf') {
+      return throwError(
+        () =>
+          new HttpErrorResponse({
+            statusText: 'no dummy names please!',
+            status: 400,
+          })
+      );
+    }
+    this.customers = this.customers.map((c) =>
+      c.id === customer.id ? customer : c
+    );
     return of({ customer });
   }
 

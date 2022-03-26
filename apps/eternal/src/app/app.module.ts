@@ -9,17 +9,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Configuration } from '@eternal/shared/config';
 import { SharedMasterDataModule } from '@eternal/shared/master-data';
 import { SecurityModule } from '@eternal/shared/security';
+import { SharedUiMessagingModule } from '@eternal/shared/ui-messaging';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
+import { LoadingInterceptor } from '../../../../libs/shared/ui-messaging/src/lib/loader/loading.interceptor';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppComponentModule } from './app.component.module';
 import { BaseUrlInterceptor } from './core/base-url.interceptor';
-import { LoadingInterceptor } from './core/loading.interceptor';
 
 registerLocaleData(localeDe, 'de-AT');
 
@@ -45,6 +46,7 @@ registerLocaleData(localeDe, 'de-AT');
     }),
     FormlyMaterialModule,
     SharedMasterDataModule,
+    SharedUiMessagingModule,
   ],
   providers: [
     {

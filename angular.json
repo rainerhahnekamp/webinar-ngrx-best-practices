@@ -13,6 +13,7 @@
     "shared-form": "libs/shared/form",
     "shared-master-data": "libs/shared/master-data",
     "shared-security": "libs/shared/security",
+    "shared-ui-messaging": "libs/shared/ui-messaging",
     "user": "libs/user"
   }
 }

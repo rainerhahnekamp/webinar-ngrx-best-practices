@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/shared/ui-messaging",
+  "sourceRoot": "libs/shared/ui-messaging/src",
+  "prefix": "eternal",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/ui-messaging"],
+      "options": {
+        "jestConfig": "libs/shared/ui-messaging/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/ui-messaging/src/**/*.ts",
+          "libs/shared/ui-messaging/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

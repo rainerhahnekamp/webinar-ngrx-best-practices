@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import { CustomerPipeModule } from '../customer.pipe';
 import { CustomersComponent } from './customers.component';
@@ -15,6 +17,8 @@ import { CustomersComponent } from './customers.component';
     MatButtonModule,
     CommonModule,
     CustomerPipeModule,
+    MatPaginatorModule,
+    MatTableModule,
   ],
 })
 export class CustomersComponentModule {}

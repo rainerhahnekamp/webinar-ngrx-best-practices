@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, NgModule } from '@angular/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { LoadingService } from '../shared/loading.service';
+import { LoadingService } from './loading.service';
 
 @Component({
   selector: 'eternal-loader',

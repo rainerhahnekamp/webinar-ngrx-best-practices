@@ -1,17 +1,19 @@
 import { Customer } from '@eternal/customer/model';
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { added, load, loaded, removed, updated } from './customer.actions';
+import { load, loaded } from './customer.actions';
 
 export type LoadStatus = 'NOT_LOADED' | 'LOADING' | 'LOADED';
 
 export interface CustomerState {
   loadStatus: LoadStatus;
   customers: Customer[];
+  selectedId: number | undefined;
 }
 
 export const initialState: CustomerState = {
   loadStatus: 'NOT_LOADED',
   customers: [],
+  selectedId: undefined,
 };
 
 export const customerFeature = createFeature({
@@ -25,18 +27,6 @@ export const customerFeature = createFeature({
     on(loaded, (state, { customers }) => ({
       ...state,
       loadStatus: 'LOADED',
-      customers,
-    })),
-    on(added, (state, { customers }) => ({
-      ...state,
-      customers,
-    })),
-    on(updated, (state, { customers }) => ({
-      ...state,
-      customers,
-    })),
-    on(removed, (state, { customers }) => ({
-      ...state,
       customers,
     }))
   ),

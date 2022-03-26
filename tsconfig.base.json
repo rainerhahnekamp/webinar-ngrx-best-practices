@@ -25,6 +25,7 @@
       "@eternal/shared/form": ["libs/shared/form/src/index.ts"],
       "@eternal/shared/master-data": ["libs/shared/master-data/src/index.ts"],
       "@eternal/shared/security": ["libs/shared/security/src/index.ts"],
+      "@eternal/shared/ui-messaging": ["libs/shared/ui-messaging/src/index.ts"],
       "@eternal/user": ["libs/user/src/index.ts"]
     }
   },

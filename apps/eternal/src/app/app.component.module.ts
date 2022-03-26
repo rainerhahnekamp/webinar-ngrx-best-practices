@@ -2,9 +2,12 @@ import { NgModule } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
+import {
+  LoaderComponentModule,
+  MessageComponentModule,
+} from '@eternal/shared/ui-messaging';
 import { AppComponent } from './app.component';
 import { HeaderComponentModule } from './core/header/header.component';
-import { LoaderComponentModule } from './core/loader.component';
 import { SidemenuComponentModule } from './core/sidemenu/sidemenu.component';
 
 @NgModule({
@@ -16,6 +19,7 @@ import { SidemenuComponentModule } from './core/sidemenu/sidemenu.component';
     SidemenuComponentModule,
     LoaderComponentModule,
     RouterModule,
+    MessageComponentModule,
   ],
   exports: [AppComponent],
 })

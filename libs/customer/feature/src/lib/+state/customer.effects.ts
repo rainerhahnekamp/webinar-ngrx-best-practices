@@ -3,20 +3,19 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Customer } from '@eternal/customer/model';
 import { Configuration } from '@eternal/shared/config';
+import { MessageService } from '@eternal/shared/ui-messaging';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { concatMap, filter, map, switchMap, tap } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 import {
-  add,
-  added,
-  get,
-  load,
-  loaded,
-  remove,
-  removed,
-  update,
-  updated,
-} from './customer.actions';
+  catchError,
+  concatMap,
+  filter,
+  map,
+  switchMap,
+  tap,
+} from 'rxjs/operators';
+import { add, get, load, loaded, remove, update } from './customer.actions';
 import { fromCustomer } from './customer.selectors';
 
 @Injectable()
@@ -52,29 +51,37 @@ export class CustomerEffects {
           customer
         )
       ),
-      map(({ customers }) => added({ customers })),
-      tap(() => this.router.navigateByUrl('/customer'))
+
+      tap(() => this.router.navigateByUrl('/customer')),
+      map(() => load())
     )
   );
 
-  updateCustomer$ = createEffect(() =>
+  update$ = createEffect(() =>
     this.actions$.pipe(
       ofType(update),
       concatMap(({ customer }) =>
-        this.http.put<Customer[]>(this.#baseUrl, customer)
+        this.http.put<Customer[]>(this.#baseUrl, customer).pipe(
+          catchError((err) => {
+            this.uiMessage.error(
+              'Customer could not be updated. Please try again later'
+            );
+            return throwError(() => err);
+          })
+        )
       ),
-      map((customers) => updated({ customers })),
-      tap(() => this.router.navigateByUrl('/customer'))
+      tap(() => this.uiMessage.info('Customer has been updated')),
+      map(() => load())
     )
   );
-  removeCustomer$ = createEffect(() =>
+  remove$ = createEffect(() =>
     this.actions$.pipe(
       ofType(remove),
       concatMap(({ customer }) =>
         this.http.delete<Customer[]>(`${this.#baseUrl}/${customer.id}`)
       ),
-      map((customers) => removed({ customers })),
-      tap(() => this.router.navigateByUrl('/customer'))
+      tap(() => this.router.navigateByUrl('/customer')),
+      map(() => load())
     )
   );
 
@@ -83,6 +90,7 @@ export class CustomerEffects {
     private http: HttpClient,
     private router: Router,
     private store: Store,
-    private configuration: Configuration
+    private configuration: Configuration,
+    private uiMessage: MessageService
   ) {}
 }
