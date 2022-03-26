@@ -6,15 +6,7 @@ import { Configuration } from '@eternal/shared/config';
 import { MessageService } from '@eternal/shared/ui-messaging';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { throwError } from 'rxjs';
-import {
-  catchError,
-  concatMap,
-  filter,
-  map,
-  switchMap,
-  tap,
-} from 'rxjs/operators';
+import { concatMap, filter, map, switchMap, tap } from 'rxjs/operators';
 import { add, get, load, loaded, remove, update } from './customer.actions';
 import { fromCustomer } from './customer.selectors';
 
@@ -61,14 +53,7 @@ export class CustomerEffects {
     this.actions$.pipe(
       ofType(update),
       concatMap(({ customer }) =>
-        this.http.put<Customer[]>(this.#baseUrl, customer).pipe(
-          catchError((err) => {
-            this.uiMessage.error(
-              'Customer could not be updated. Please try again later'
-            );
-            return throwError(() => err);
-          })
-        )
+        this.http.put<Customer[]>(this.#baseUrl, customer)
       ),
       tap(() => this.uiMessage.info('Customer has been updated')),
       map(() => load())
