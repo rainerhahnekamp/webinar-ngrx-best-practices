@@ -6,6 +6,19 @@ import { MessageStore } from './message.store';
 @Component({
   selector: 'eternal-message',
   templateUrl: './message.component.html',
+  styles: [
+    `
+      .error {
+        background: #f44336;
+        color: white;
+      }
+
+      .info {
+        background: #2193b0;
+        color: white;
+      }
+    `,
+  ],
   animations: [
     trigger('myTrigger', [
       transition(':enter', [
@@ -27,7 +40,7 @@ export class MessageComponent {
       this.messages.push(message);
       window.setTimeout(
         () => (this.messages = this.messages.filter((m) => m !== message)),
-        2000
+        3000
       );
     });
   }

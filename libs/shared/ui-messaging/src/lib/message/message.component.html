@@ -1,10 +1,12 @@
 <div
   id="toast-undo"
-  class="flex items-center w-full max-w-xs p-4 rounded-lg shadow my-4 mx-auto"
+  class="flex items-center w-full max-w-sm p-4 rounded-lg shadow my-4 mx-auto"
   *ngFor="let message of messages"
   [@myTrigger]="state"
+  [ngClass]="message.type"
 >
-  <mat-icon class="mr-4">info</mat-icon>
+  <mat-icon class="mr-4" *ngIf="message.type === 'info'">check_circle</mat-icon>
+  <mat-icon class="mr-4" *ngIf="message.type === 'error'">warning</mat-icon>
   <p class="text-sm font-normal">
     {{ message.text }}
   </p>

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Customer } from '@eternal/customer/model';
 import { Configuration } from '@eternal/shared/config';
+import { withErrorMessageContext } from '@eternal/shared/http';
 import { MessageService } from '@eternal/shared/ui-messaging';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -12,7 +13,7 @@ import { fromCustomer } from './customer.selectors';
 
 @Injectable()
 export class CustomerEffects {
-  #baseUrl = this.configuration.baseUrl;
+  #baseUrl = this.configuration.baseUrl + '/customer';
   get$ = createEffect(() =>
     this.actions$.pipe(
       ofType(get),
@@ -53,12 +54,18 @@ export class CustomerEffects {
     this.actions$.pipe(
       ofType(update),
       concatMap(({ customer }) =>
-        this.http.put<Customer[]>(this.#baseUrl, customer)
-      ),
-      tap(() => this.uiMessage.info('Customer has been updated')),
-      map(() => load())
+        this.http
+          .put<Customer[]>(this.#baseUrl, customer, {
+            context: withErrorMessageContext('Customer could not be updated'),
+          })
+          .pipe(
+            tap(() => this.uiMessage.info('Customer has been updated')),
+            map(() => load())
+          )
+      )
     )
   );
+
   remove$ = createEffect(() =>
     this.actions$.pipe(
       ofType(remove),

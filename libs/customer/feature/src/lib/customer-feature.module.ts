@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
@@ -13,12 +12,11 @@ import {
   CustomersContainerComponent,
   CustomersContainerComponentModule,
 } from './components/customers-container.component';
-import { DataGuard } from './services/data.guard';
 import {
   EditCustomerComponent,
   EditCustomerComponentModule,
 } from './components/edit-customer.component';
-import { MockedHttpClient } from './services/mocked-http-client.service';
+import { DataGuard } from './services/data.guard';
 
 @NgModule({
   imports: [
@@ -49,12 +47,6 @@ import { MockedHttpClient } from './services/mocked-http-client.service';
     ]),
     StoreModule.forFeature(customerFeature),
     EffectsModule.forFeature([CustomerEffects]),
-  ],
-  providers: [
-    {
-      provide: HttpClient,
-      useClass: MockedHttpClient,
-    },
   ],
 })
 export class CustomerFeatureModule {}

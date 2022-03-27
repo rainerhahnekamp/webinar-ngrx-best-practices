@@ -23,7 +23,9 @@
       "@eternal/holidays/ui": ["libs/holidays/ui/src/index.ts"],
       "@eternal/shared/config": ["libs/shared/config/src/index.ts"],
       "@eternal/shared/form": ["libs/shared/form/src/index.ts"],
+      "@eternal/shared/http": ["libs/shared/http/src/index.ts"],
       "@eternal/shared/master-data": ["libs/shared/master-data/src/index.ts"],
+      "@eternal/shared/ngrx-utils": ["libs/shared/ngrx-utils/src/index.ts"],
       "@eternal/shared/security": ["libs/shared/security/src/index.ts"],
       "@eternal/shared/ui-messaging": ["libs/shared/ui-messaging/src/index.ts"],
       "@eternal/user": ["libs/user/src/index.ts"]

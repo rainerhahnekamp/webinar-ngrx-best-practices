@@ -11,7 +11,9 @@
     "holidays-ui": "libs/holidays/ui",
     "shared-config": "libs/shared/config",
     "shared-form": "libs/shared/form",
+    "shared-http": "libs/shared/http",
     "shared-master-data": "libs/shared/master-data",
+    "shared-ngrx-utils": "libs/shared/ngrx-utils",
     "shared-security": "libs/shared/security",
     "shared-ui-messaging": "libs/shared/ui-messaging",
     "user": "libs/user"

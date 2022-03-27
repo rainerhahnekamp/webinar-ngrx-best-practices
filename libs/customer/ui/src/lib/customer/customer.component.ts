@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Customer } from '@eternal/customer/model';
+import { Options } from '@eternal/shared/form';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { formly } from 'ngx-formly-helpers';
-import { Options } from '@eternal/shared/form';
 
 @Component({
   selector: 'eternal-customer',

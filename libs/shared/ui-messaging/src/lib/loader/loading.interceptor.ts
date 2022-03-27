@@ -6,7 +6,7 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { LoadingService } from './loading.service';
 
@@ -25,6 +25,10 @@ export class LoadingInterceptor implements HttpInterceptor {
         if (event instanceof HttpResponse) {
           this.loadingService.stop();
         }
+      }),
+      catchError((err) => {
+        this.loadingService.stop();
+        return of(err);
       })
     );
   }

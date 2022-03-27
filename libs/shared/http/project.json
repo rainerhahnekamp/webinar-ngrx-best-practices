@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/shared/http",
+  "sourceRoot": "libs/shared/http/src",
+  "prefix": "eternal",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/http"],
+      "options": {
+        "jestConfig": "libs/shared/http/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/http/src/**/*.ts",
+          "libs/shared/http/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
