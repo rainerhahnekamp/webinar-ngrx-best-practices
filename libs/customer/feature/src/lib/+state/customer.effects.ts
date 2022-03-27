@@ -4,23 +4,14 @@ import { Router } from '@angular/router';
 import { Customer } from '@eternal/customer/model';
 import { Configuration } from '@eternal/shared/config';
 import { MessageService } from '@eternal/shared/ui-messaging';
-import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { concatMap, filter, map, switchMap, tap } from 'rxjs/operators';
-import { add, get, load, loaded, remove, update } from './customer.actions';
-import { fromCustomer } from './customer.selectors';
+import { concatMap, map, switchMap, tap } from 'rxjs/operators';
+import { add, load, loaded, remove, update } from './customer.actions';
 
 @Injectable()
 export class CustomerEffects {
   #baseUrl = this.configuration.baseUrl + '/customer';
-  get$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(get),
-      concatLatestFrom(() => this.store.select(fromCustomer.selectLoadStatus)),
-      filter(([, loadStatus]) => loadStatus === 'NOT_LOADED'),
-      map(() => load())
-    )
-  );
 
   load$ = createEffect(() =>
     this.actions$.pipe(
