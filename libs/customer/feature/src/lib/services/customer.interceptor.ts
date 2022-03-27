@@ -50,9 +50,9 @@ export class CustomerInterceptor implements HttpInterceptor {
 
   #get(
     url: string,
-    options?: { params: HttpParams }
+    options: { params: HttpParams }
   ): Observable<HttpResponse<Customer[]>> {
-    if (options === undefined) {
+    if (!options.params.has('page')) {
       return of({ content: this.customers }).pipe(this.#logRequest('GET', url));
     } else {
       return this.#sortCustomers(Number(options.params.get('page'))).pipe(
@@ -76,7 +76,6 @@ export class CustomerInterceptor implements HttpInterceptor {
     return this.#toHttpResponse(
       of(true).pipe(
         map(() => {
-          console.log(customer);
           if (customer.name === 'asdf') {
             throw new HttpErrorResponse({
               status: 400,
