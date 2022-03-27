@@ -29,6 +29,7 @@ export class CustomerEffects {
       switchMap(() =>
         this.http.get<{ content: Customer[]; totalPages: number }>(
           this.#baseUrl
+          // { params: new HttpParams().set('page', 10) }
         )
       ),
       map(({ content }) => loaded({ customers: content }))
