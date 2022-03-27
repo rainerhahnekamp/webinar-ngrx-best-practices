@@ -1589,6 +1589,13 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
+"@ngrx/component@^13.0.2":
+  version "13.0.2"
+  resolved "https://registry.yarnpkg.com/@ngrx/component/-/component-13.0.2.tgz#7555e126061f054a1654134cd5223b61e52130f2"
+  integrity sha512-Izq984Soqt/ze/XyNLTvFjdMkuGLwarfe0hT9qjVO8cHgI5hEAvjwklv+JHmM1dtJOZ+USoM0rgwaUU5iInQfA==
+  dependencies:
+    tslib "^2.0.0"
+
 "@ngrx/effects@^13.0.2":
   version "13.0.2"
   resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-13.0.2.tgz#785e54459efaef70ed3754a33d9f4ddd0ff9f033"
