@@ -6,7 +6,6 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CustomerInterceptor } from '@eternal/customer/feature';
 import { Configuration } from '@eternal/shared/config';
 import { BaseUrlInterceptor, ErrorInterceptor } from '@eternal/shared/http';
 import { SharedMasterDataModule } from '@eternal/shared/master-data';
@@ -65,7 +64,6 @@ registerLocaleData(localeDe, 'de-AT');
     { provide: HTTP_INTERCEPTORS, multi: true, useClass: BaseUrlInterceptor },
     { provide: HTTP_INTERCEPTORS, multi: true, useClass: LoadingInterceptor },
     { provide: HTTP_INTERCEPTORS, multi: true, useClass: ErrorInterceptor },
-    { provide: HTTP_INTERCEPTORS, multi: true, useClass: CustomerInterceptor },
     { provide: LOCALE_ID, useValue: 'de-AT' },
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
