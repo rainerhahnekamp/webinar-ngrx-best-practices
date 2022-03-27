@@ -40,7 +40,12 @@ public class CustomerController {
 
     Page<CustomerEntity> customerEntityPage =
         this.repository.findAll(PageRequest.of(page, pageSize));
-    customerPage.setTotalPages(customerEntityPage.getTotalPages());
+    int totalPages = customerPage.getTotalPages();;
+    if (page > totalPages) {
+      throw new RuntimeException("Page " + page + "does not exist. Total pages are " + totalPages);
+    }
+    customerPage.setTotalPages(totalPages);
+
     customerPage.setContent(
         customerEntityPage.getContent().stream()
             .map(mapper::mapFromEntity)
@@ -55,6 +60,9 @@ public class CustomerController {
 
   @PutMapping("")
   public Customer edit(@RequestBody Customer customer) {
+    if ("asdf".equals(customer.getName())) {
+      throw new RuntimeException("Please use real names");
+    }
     return this.repository
         .findById(customer.getId())
         .map(
