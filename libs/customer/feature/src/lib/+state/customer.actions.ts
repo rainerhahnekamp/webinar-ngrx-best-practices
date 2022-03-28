@@ -33,3 +33,10 @@ export const removed = createAction(
   '[CUSTOMER] Removed',
   props<{ customers: Customer[] }>()
 );
+
+export const select = createAction(
+  '[Customer] Select',
+  props<{ id: number }>()
+);
+
+export const unselect = createAction('[Customer] Unselect');

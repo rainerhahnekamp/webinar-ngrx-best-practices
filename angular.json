@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
+    "booking": "libs/booking",
     "customer-feature": "libs/customer/feature",
     "customer-model": "libs/customer/model",
     "customer-ui": "libs/customer/ui",

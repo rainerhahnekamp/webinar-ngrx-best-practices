@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/booking",
+  "sourceRoot": "libs/booking/src",
+  "prefix": "eternal",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/booking"],
+      "options": {
+        "jestConfig": "libs/booking/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/booking/src/**/*.ts",
+          "libs/booking/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

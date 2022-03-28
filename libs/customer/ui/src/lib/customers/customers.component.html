@@ -32,8 +32,14 @@
       <mat-cell *matCellDef="let element"
         ><a [routerLink]="['.', element.id]">
           <mat-icon>edit</mat-icon>
-        </a></mat-cell
-      >
+        </a>
+        <mat-slide-toggle
+          class="ml-4"
+          (change)="toggleSelection($event, element.id)"
+          [checked]="element.selected"
+          color="primary"
+        ></mat-slide-toggle>
+      </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
