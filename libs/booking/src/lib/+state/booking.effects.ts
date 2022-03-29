@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { selectSelectedCustomer } from '@eternal/customer/feature';
-import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
+import { CustomerFacade } from '@eternal/customer/feature';
+import { Actions, createEffect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { filter, map } from 'rxjs';
-import { load, loaded } from './booking.actions';
+import { loaded } from './booking.actions';
 import { Booking } from './booking.reducer';
 
 const bookings: Map<number, Booking[]> = new Map<number, Booking[]>();
@@ -40,16 +40,14 @@ export class BookingEffects {
   constructor(
     private httpClient: HttpClient,
     private actions$: Actions,
-    private store: Store
+    private store: Store,
+    private customerFacade: CustomerFacade
   ) {}
 
   load$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(load),
-      concatLatestFrom(() => this.store.select(selectSelectedCustomer)),
-      map(([, customerId]) => customerId),
+    this.customerFacade.getCustomerId().pipe(
       filter(Boolean),
-      map((customer) => loaded({ bookings: bookings.get(customer.id) || [] }))
+      map((customerId) => loaded({ bookings: bookings.get(customerId) || [] }))
     )
   );
 }

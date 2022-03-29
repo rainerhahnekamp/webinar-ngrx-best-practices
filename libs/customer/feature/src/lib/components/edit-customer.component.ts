@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Customer } from '@eternal/customer/model';
+import { CustomerComponentModule } from '@eternal/customer/ui';
 import { Options } from '@eternal/shared/form';
 import { fromMaster } from '@eternal/shared/master-data';
 import { Store } from '@ngrx/store';
 import { combineLatest, Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { CustomerComponentModule } from '@eternal/customer/ui';
 import { remove, update } from '../+state/customer.actions';
 import { fromCustomer } from '../+state/customer.selectors';
 
@@ -57,7 +57,11 @@ export class EditCustomerComponent {
 
   remove(customer: Customer) {
     this.store.dispatch(
-      remove({ customer: { ...customer, id: this.customerId } })
+      remove({
+        customer: { ...customer, id: this.customerId },
+        forward: '/customer',
+        message: 'Customer deleted',
+      })
     );
   }
 

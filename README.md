@@ -1,52 +1,16 @@
-# Professional NgRx
+# Webinar NgRx - Best Practices: 28. March 2022
 
-After cloning the project, run `yarn` for downloading the dependencies. Verify
-that the applications starts with `npm run start`.
+This is the repository which was used at the Webinar for NgRx best practices.
 
-`https://api.eternal-holidays.net` acts as the default backend.
+It shows best practices for 
+1. error handling,
+2. deferred action, and
+3. dependent feature states.
 
----
+Please note we didn't include architectural best practices. In practice (or as shown in our "Professional NgRx" workshop), dependency rules would be in place which require a different structure. 
 
-If the backend is not reachable you can also run the backend locally (see below)
-.
+Slides are located in `/slides.pdf`.
 
-### Local Backend
-
-You can run the backend also locally. It is written in Spring Boot and uses H2
-as database. The db file is located in `backend/db.mv.db`.
-
-Execute `./mvnw spring-boot:run -pl backend`. You require at least Java 1.8.
-
-You also have to replace the `baseUrl` property in `environment.ts` or just
-run `npm run start:dev-local`.
-
-### Full Rewrite from Scratch
-
-If you have the desire to fully rebuild the system from scratch with an Angular
-application build from scratch, following commands should be executed:
-
-```bash
-npx ng add @angular/material
-
-# NgRx
-yarn add @ngrx/store @ngrx/effects @ngrx/store-devtools
-
-# Forms
-yarn add @ngx-formly/core @ngx-formly/material ngx-formly-helpers
-
-# Utility libs
-yarn add date-fns
-
-# Tailwind
-yarn add -D tailwindcss postcss autoprefixer
-
-# RxJs Marbles
-yarn add -D rxjs-marbles
-
-# Testing Boilerplate
-yarn add -D @ngneat/spectator ng-mocks @testing-library/angular
+For more information, visit us as https://www.angulararchitects.io/en/angular-workshops/professional-ngrx/
 
 
-# Playwright
-pnpm add -D @playwright/test
-```

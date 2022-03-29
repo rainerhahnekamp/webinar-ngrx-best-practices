@@ -2,7 +2,7 @@ import { Customer } from '@eternal/customer/model';
 import { createSelector } from '@ngrx/store';
 import { customerFeature } from './customer.reducer';
 
-const { selectCustomers, selectSelectedId } = customerFeature;
+const { selectCustomers, selectSelectedId, selectHasError } = customerFeature;
 
 const selectById = (id: number) =>
   createSelector(selectCustomers, (state: Customer[]) =>
@@ -31,4 +31,6 @@ export const fromCustomer = {
   selectCustomerWithSelected,
   selectSelectedCustomer,
   selectById,
+  selectHasError,
+  selectSelectedId,
 };

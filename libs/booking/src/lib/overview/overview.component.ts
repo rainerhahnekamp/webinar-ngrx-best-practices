@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { filter } from 'rxjs';
-import { load } from '../+state/booking.actions';
 import { Booking } from '../+state/booking.reducer';
 import { fromBookings } from '../+state/booking.selectors';
 
@@ -24,7 +23,6 @@ export class OverviewComponent implements OnInit {
       .pipe(filter(Boolean))
       .subscribe((bookingData) => {
         if (bookingData?.loaded === false) {
-          this.store.dispatch(load());
         } else {
           this.userName = bookingData.customerName;
           this.dataSource.data = bookingData.bookings;

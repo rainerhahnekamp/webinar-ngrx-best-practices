@@ -3,11 +3,21 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Customer } from '@eternal/customer/model';
 import { Configuration } from '@eternal/shared/config';
+import { withErrorMessageContext } from '@eternal/shared/http';
+import { safeConcatMap } from '@eternal/shared/ngrx-utils';
 import { MessageService } from '@eternal/shared/ui-messaging';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { concatMap, map, switchMap, tap } from 'rxjs/operators';
-import { add, load, loaded, remove, update } from './customer.actions';
+import { of } from 'rxjs';
+import { catchError, concatMap, map, switchMap, tap } from 'rxjs/operators';
+import {
+  add,
+  load,
+  loaded,
+  loadFailed,
+  remove,
+  update,
+} from './customer.actions';
 
 @Injectable()
 export class CustomerEffects {
@@ -17,12 +27,16 @@ export class CustomerEffects {
     this.actions$.pipe(
       ofType(load),
       switchMap(() =>
-        this.http.get<{ content: Customer[]; totalPages: number }>(
-          this.#baseUrl
-          // { params: new HttpParams().set('page', 10) }
-        )
-      ),
-      map(({ content }) => loaded({ customers: content }))
+        this.http
+          .get<{ content: Customer[]; totalPages: number }>(
+            this.#baseUrl
+            // params: new HttpParams().set('page', 10),
+          )
+          .pipe(
+            map(({ content }) => loaded({ customers: content })),
+            catchError(() => of(loadFailed()))
+          )
+      )
     )
   );
 
@@ -44,23 +58,29 @@ export class CustomerEffects {
   update$ = createEffect(() =>
     this.actions$.pipe(
       ofType(update),
-      concatMap(({ customer }) =>
+      safeConcatMap(({ customer }) =>
         this.http
-          .put<Customer[]>(this.#baseUrl, customer)
-          .pipe(tap(() => this.uiMessage.info('Customer has been updated')))
-      ),
-      map(() => load())
+          .put<Customer[]>(this.#baseUrl, customer, {
+            context: withErrorMessageContext('Customer could not be updated'),
+          })
+          .pipe(
+            tap(() => this.uiMessage.info('Customer has been updated')),
+            map(() => load())
+          )
+      )
     )
   );
 
   remove$ = createEffect(() =>
     this.actions$.pipe(
       ofType(remove),
-      concatMap(({ customer }) =>
-        this.http.delete<Customer[]>(`${this.#baseUrl}/${customer.id}`)
-      ),
-      tap(() => this.router.navigateByUrl('/customer')),
-      map(() => load())
+      concatMap(({ customer, forward, message }) =>
+        this.http.delete<Customer[]>(`${this.#baseUrl}/${customer.id}`).pipe(
+          tap(() => this.uiMessage.info(message)),
+          tap(() => this.router.navigateByUrl(forward)),
+          map(() => load())
+        )
+      )
     )
   );
 
